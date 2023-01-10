@@ -1,5 +1,6 @@
 const express = require('express')
 const format = require('date-format')
+const cors = require('cors');
 const app = express()
 // swagger docs 
 const swaggerUi = require('swagger-ui-express');
