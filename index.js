@@ -6,7 +6,9 @@ const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('swagger.yaml');
 
-
+app.use(cors({
+    origin : "*"
+}));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const PORT = 4000 || process.env.PORT
