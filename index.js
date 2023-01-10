@@ -1,15 +1,17 @@
-const express = require('express')
-const format = require('date-format')
+const express = require('express');
+const format = require('date-format');
 const cors = require('cors');
-const app = express()
+const app = express();
 // swagger docs 
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
+const { json } = require('express');
 const swaggerDocument = YAML.load('swagger.yaml');
 
 app.use(cors({
     origin : "*"
 }));
+app.use(json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const PORT = 4000 || process.env.PORT
@@ -25,7 +27,7 @@ app.get('/api/v1/instagram',(req,res)=>{
           follows :22,
           date:format('hh:mm:ss', new Date())
     }
-    res.status(200).send([instasocial])
+    res.status(200).json(instasocial);
 })
 
 app.get('/api/v1/facebook',(req,res)=>{
@@ -35,7 +37,7 @@ app.get('/api/v1/facebook',(req,res)=>{
           follows :22,
           date:format('hh:mm:ss', new Date())
     }
-    res.status(200).send([instasocial])
+    res.status(200).json(instasocial);
 })
 
 app.get('/api/v1/linkedin',(req,res)=>{
@@ -45,7 +47,7 @@ app.get('/api/v1/linkedin',(req,res)=>{
           follows :672,
           date:format('hh:mm:ss', new Date())
     }
-    res.status(200).send([instasocial])
+    res.status(200).json(instasocial);
 })
 
 app.listen(PORT,()=>{
